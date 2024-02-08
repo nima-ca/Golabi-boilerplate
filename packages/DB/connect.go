@@ -1,18 +1,15 @@
 package db
 
 import (
-	"os"
-
+	"github.com/spf13/viper"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-var DB *gorm.DB
-
 func Connect() {
 	var err error
 
-	dsn := os.Getenv("DB_CONNECTION")
+	dsn := viper.GetString("DB_CONNECTION")
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {

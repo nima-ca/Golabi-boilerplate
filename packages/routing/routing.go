@@ -1,6 +1,8 @@
 package routing
 
 import (
+	userRoutes "Golabi-boilerplate/app/user/routes"
+
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -24,4 +26,5 @@ func RegisterRoutes() {
 	router.Static("/public", "./public")
 
 	// Register your routes here:
+	userRoutes.Register(router)
 }

@@ -2,11 +2,11 @@ package jwt
 
 import (
 	"fmt"
-	"os"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/spf13/viper"
 )
 
 type GeneratedToken struct {
@@ -28,7 +28,7 @@ func GenerateToken(userID uint, expire int64) (string, error) {
 	})
 
 	// Sign Token
-	tokenString, signTokenErr := token.SignedString([]byte(os.Getenv("JWT_SECRET")))
+	tokenString, signTokenErr := token.SignedString([]byte(viper.GetString("JWT_SECRET")))
 	if signTokenErr != nil {
 		return "", signTokenErr
 	}
@@ -43,7 +43,7 @@ func DecodeToken(token string) (*jwt.Token, error) {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
 
-		return []byte(os.Getenv("JWT_SECRET")), nil
+		return []byte(viper.GetString("JWT_SECRET")), nil
 	})
 }
 
