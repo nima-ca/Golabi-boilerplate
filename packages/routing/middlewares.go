@@ -18,18 +18,9 @@ func RegisterMiddlewares() {
 	// Add security headers
 	router.Use(helmet.New())
 
-
-	origins := "http://localhost:3000"
-
-	// Change Origin if the env is prod
-	env := viper.Get("APP_ENV")
-	if env == "prod" {
-		origins = "https://yourdomain.com"
-	}
-
 	// Add CORS policies
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     origins,
+		AllowOrigins:     viper.GetString("ORIGINS"),
 		AllowCredentials: true,
 	}))
 
@@ -37,7 +28,7 @@ func RegisterMiddlewares() {
 	router.Use(logger.New(logger.Config{
 		Format:     "${pid}  |  [${time}]  |  ${status}  |  ${latency}  |  ${method} - ${path}\n",
 		TimeFormat: "15:04:05 02-Jan-2006",
-		TimeZone:   "Asia/Tehran",
+		TimeZone:   "Asia/Tehran", // Change timezone based on your location
 	}))
 
 }

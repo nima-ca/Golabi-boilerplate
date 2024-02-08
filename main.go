@@ -1,7 +1,7 @@
 package main
 
-import "Golabi-boilerplate/packages/bootstrap"
+import "Golabi-boilerplate/cmd"
 
 func main() {
-	bootstrap.Serve()
+	cmd.Execute()
 }
