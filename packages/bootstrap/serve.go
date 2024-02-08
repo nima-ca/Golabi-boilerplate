@@ -1,7 +1,7 @@
 package bootstrap
 
 import (
-	db "Golabi-boilerplate/packages/DB"
+	db "Golabi-boilerplate/packages/db"
 	"Golabi-boilerplate/packages/routing"
 	"Golabi-boilerplate/packages/validators"
 
@@ -9,7 +9,6 @@ import (
 )
 
 func Serve() {
-
 	// Connect to DB
 	db.Connect()
 
